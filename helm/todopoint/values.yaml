@@ -135,7 +135,7 @@ mysql:
   config:
     name: mysql-config
     keys:
-      DB_HOST: "127.0.0.1"
+      DB_HOST: "172.21.0.5"
       DB_PORT: "3306"
       DB_DATABASE: "todopoint"
 
@@ -145,3 +145,19 @@ mysql:
     keys:
       DB_USERNAME: "cG9pbnRlcg=="
       DB_PASSWORD: "dG9kb3BvaW50"
+
+redis:
+  name: redis
+  config:
+    name: redis-config
+    keys:
+      REDIS_HOST: ""
+      REDIS_PORT: "6379"
+
+  secret:
+    name: redis-secret
+    type: Opaque
+    keys:
+      REDIS_PASSWORD: "" # Default is empty
+
+

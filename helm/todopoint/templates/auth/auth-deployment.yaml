@@ -28,6 +28,7 @@ spec:
               memory: {{ .Values.auth.pod.resources.limits.memory }}
               cpu: {{ .Values.auth.pod.resources.limits.cpu }}
           env:
+            # Mysql
             {{- range $key, $value := .Values.mysql.config.keys }}
             - name: {{ $key }}
               valueFrom:
@@ -40,5 +41,21 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ $.Values.mysql.secret.name }}
+                  key: {{ $key }}
+            {{- end }}
+
+            # Redis
+            {{- range $key, $value := .Values.redis.config.keys }}
+            - name: {{ $key }}
+              valueFrom:
+                configMapKeyRef:
+                  name: {{ $.Values.redis.config.name }}
+                  key: {{ $key }}
+            {{- end }}
+            {{- range $key, $value := .Values.redis.secret.keys }}
+            - name: {{ $key }}
+              valueFrom:
+                secretKeyRef:
+                  name: {{ $.Values.redis.secret.name }}
                   key: {{ $key }}
             {{- end }}
